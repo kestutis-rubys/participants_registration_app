@@ -1,0 +1,28 @@
+
+GET http://localhost:5000/api/participants/
+
+#####
+POST http://localhost:5000/api/participants/
+Content-Type: application/json
+
+{
+    "name": "Tomas",
+    "surname": "Kondrotas",
+    "email": "t.kondrotas@gmail.com",
+    "age": 25
+}
+
+#####
+
+PUT http://localhost:5000/api/participants/61b0ed14553138289e7e9ddb
+Content-Type: application/json
+
+{
+    "name": "Karolis",
+    "surname": "Mankauskas",
+    "email": "k.mankauskas@gmail.com",
+    "age": 30
+}
+
+#####
+DELETE http://localhost:5000/api/participants/61afebdc1949dfc85b46aa82
