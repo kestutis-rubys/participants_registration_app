@@ -20,17 +20,27 @@ const useFetch = (method, endpoint, id, participantData) => {
         break;
       }
       case 'POST': {
-        axios.post(`${API}${endpoint}`, participantData).then((result) => {
-          console.log(result.data);
-        });
+        axios
+          .post(`${API}${endpoint}`, participantData)
+          .then((result) => {
+            setData(result.data);
+            setLoading(false);
+          })
+          .catch((err) => setError(err));
         break;
       }
       case 'PUT': {
-        console.log(method);
+        console.log(id);
         break;
       }
       case 'DELETE': {
-        console.log(method);
+        axios
+          .delete(`${API}${endpoint}/${id}`)
+          .then((result) => {
+            setData(result.data.data);
+            setLoading(false);
+          })
+          .catch((err) => setError(err));
         break;
       }
       default:

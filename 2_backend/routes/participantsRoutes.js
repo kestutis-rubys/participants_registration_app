@@ -26,9 +26,11 @@ router.put('/participants/:id', (req, res) => {
 // DELETE participant by id
 router.delete('/participants/:id', (req, res) => {
   const participantId = req.params.id;
-  Participant.findByIdAndDelete({ _id: participantId }).then(() =>
-    res.json({ message: 'Participant data was deleted' })
-  );
+  Participant.findByIdAndDelete({ _id: participantId }).then(() => {
+    Participant.find({}).then((data) =>
+      res.json({ data: data, message: 'Participant data was deleted' })
+    );
+  });
 });
 
 module.exports = router;
