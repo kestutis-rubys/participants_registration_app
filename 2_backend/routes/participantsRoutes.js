@@ -11,7 +11,9 @@ router.get('/participants/', (req, res) => {
 router.post('/participants/', (req, res) => {
   const participant = new Participant(req.body);
   participant.save();
-  res.json({ message: 'Participant data saved successfully' });
+  Participant.find({}).then((data) =>
+    res.json({ data: data, message: 'Participant data saved successfully' })
+  );
 });
 
 // PUT update participant by id
@@ -19,7 +21,10 @@ router.put('/participants/:id', (req, res) => {
   const participantId = req.params.id;
   const updatedParticipant = req.body;
   Participant.findOneAndUpdate({ _id: participantId }, updatedParticipant).then(
-    () => res.json({ message: 'Participant data was updated' })
+    () =>
+      Participant.find({}).then((data) =>
+        res.json({ data: data, message: 'Participant data was updated' })
+      )
   );
 });
 
