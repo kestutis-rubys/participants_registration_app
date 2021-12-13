@@ -52,6 +52,7 @@ const ParticipantsRegistrationForm = ({
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required={true}
           />
         </div>
         <div>
@@ -60,6 +61,7 @@ const ParticipantsRegistrationForm = ({
           <input
             type='text'
             value={surname}
+            required={true}
             onChange={(e) => setSurname(e.target.value)}
           />
         </div>
@@ -69,6 +71,7 @@ const ParticipantsRegistrationForm = ({
           <input
             type='email'
             value={email}
+            required={true}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -78,6 +81,7 @@ const ParticipantsRegistrationForm = ({
           <input
             type='number'
             value={age}
+            required={true}
             onChange={(e) => setAge(e.target.value)}
           />
         </div>
