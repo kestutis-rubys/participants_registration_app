@@ -1,23 +1,10 @@
-import React, { useState, useContext } from 'react';
-import useFetch from '../../hooks/useFetch';
-import { DataContext } from '../../App';
+import React, { useState } from 'react';
 
-const ParticipantsRegistrationForm = () => {
+const ParticipantsRegistrationForm = ({ createData }) => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
-  const [participantData, setParticipantData] = useState([]);
-  const [method, setMethod] = useState('');
-  const [showMessage, setShowMessage] = useState(false);
-  const { dataItems, setDataItems } = useContext(DataContext);
-
-  const [loading, data, error] = useFetch(
-    method,
-    'participants',
-    null,
-    participantData
-  );
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -27,16 +14,12 @@ const ParticipantsRegistrationForm = () => {
       email: email.trim().toLocaleLowerCase(),
       age: age,
     };
-    console.log(participant);
-    setMethod('POST');
-    setParticipantData(participant);
-    setShowMessage(true);
-    setDataItems(!dataItems);
     // clean input fields
-    // setName('');
-    // setSurname('');
-    // setEmail('');
-    // setAge('');
+    setName('');
+    setSurname('');
+    setEmail('');
+    setAge('');
+    return createData(participant);
   };
 
   return (
@@ -82,15 +65,6 @@ const ParticipantsRegistrationForm = () => {
           <input type='submit' value='Enter' />
         </div>
       </form>
-      <div>
-        {showMessage && loading ? (
-          <p>Saving...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          <p>{data.message}</p>
-        )}
-      </div>
     </>
   );
 };

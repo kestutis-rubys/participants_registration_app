@@ -6,6 +6,7 @@ const useFetch = (method, endpoint, id, participantData) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     switch (method) {
@@ -23,7 +24,8 @@ const useFetch = (method, endpoint, id, participantData) => {
         axios
           .post(`${API}${endpoint}`, participantData)
           .then((result) => {
-            setData(result.data);
+            setData(result.data.data);
+            setMessage(result.data.message);
             setLoading(false);
           })
           .catch((err) => setError(err));
@@ -38,6 +40,7 @@ const useFetch = (method, endpoint, id, participantData) => {
           .delete(`${API}${endpoint}/${id}`)
           .then((result) => {
             setData(result.data.data);
+            setMessage(result.data.message);
             setLoading(false);
           })
           .catch((err) => setError(err));
@@ -46,7 +49,7 @@ const useFetch = (method, endpoint, id, participantData) => {
       default:
     }
   }, [method, endpoint, id, participantData]);
-  return [loading, data, error];
+  return [loading, data, error, message];
 };
 
 export default useFetch;
