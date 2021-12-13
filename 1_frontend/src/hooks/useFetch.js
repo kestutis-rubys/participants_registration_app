@@ -32,7 +32,11 @@ const useFetch = (method, endpoint, id, participantData) => {
         break;
       }
       case 'PUT': {
-        console.log(id);
+        axios.put(`${API}${endpoint}/${id}`, participantData).then((result) => {
+          setData(result.data.data);
+          setMessage(result.data.message);
+          setLoading(false);
+        });
         break;
       }
       case 'DELETE': {

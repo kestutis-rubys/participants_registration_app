@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UpdatingData } from '../../App';
 
-const ParticipantsRegistrationForm = ({ createData }) => {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [age, setAge] = useState('');
+const ParticipantsRegistrationForm = ({
+  createData,
+  updatingName,
+  updatingSurname,
+  updatingEmail,
+  updatingAge,
+  updatingId,
+  updateData,
+  inputText,
+}) => {
+  const [name, setName] = useState(updatingName);
+  const [surname, setSurname] = useState(updatingSurname);
+  const [email, setEmail] = useState(updatingEmail);
+  const [age, setAge] = useState(updatingAge);
+  const { dataUpdating, setDataUpdating } = useContext(UpdatingData);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setName(name.trim().toLocaleLowerCase());
+    setSurname(surname.trim().toLocaleLowerCase());
+    setEmail(email.trim().toLocaleLowerCase());
+    setAge(age);
     const participant = {
-      name: name.trim().toLocaleLowerCase(),
-      surname: surname.trim().toLocaleLowerCase(),
-      email: email.trim().toLocaleLowerCase(),
+      name: name,
+      surname: surname,
+      email: email,
       age: age,
     };
     // clean input fields
@@ -19,7 +34,12 @@ const ParticipantsRegistrationForm = ({ createData }) => {
     setSurname('');
     setEmail('');
     setAge('');
-    return createData(participant);
+    if (dataUpdating) {
+      setDataUpdating(false);
+      return updateData(updatingId, participant);
+    } else {
+      return createData(participant);
+    }
   };
 
   return (
@@ -62,7 +82,7 @@ const ParticipantsRegistrationForm = ({ createData }) => {
           />
         </div>
         <div>
-          <input type='submit' value='Enter' />
+          <input data-set={updatingId} type='submit' value={inputText} />
         </div>
       </form>
     </>

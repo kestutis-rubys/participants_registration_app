@@ -5,28 +5,30 @@ const ParticipantsTable = ({
   data,
   loading,
   error,
-  message,
   deleteData,
-  updateData,
+  collectData,
 }) => {
   // GET CURRENT YEAR
   const currentYear = new Date().getFullYear();
   let number = 1;
 
   // UPDATE PARTICIPANT DATA
-  const updateParticipantData = (e) => {
+  const collectParticipantData = (e) => {
     const participantId = e.target.dataset.set;
     let participantData;
     const tableBodyTr = document.querySelectorAll('tr');
     tableBodyTr.forEach((item) => {
-      participantData = {
-        name: item.children[1].innerText.split(' ')[0],
-        surname: item.children[1].innerText.split(' ')[1],
-        email: item.children[2].innerText,
-        age: item.children[3].innerText,
-      };
+      if (item.id === participantId) {
+        participantData = {
+          name: item.children[1].innerText.split(' ')[0],
+          surname: item.children[1].innerText.split(' ')[1],
+          email: item.children[2].innerText,
+          age: item.children[3].innerText,
+          date: currentYear,
+        };
+      }
     });
-    return updateData(participantId, participantData);
+    return collectData(participantId, participantData);
   };
 
   // DELETE PARTICIPANT DATA
@@ -67,7 +69,7 @@ const ParticipantsTable = ({
                 <td>
                   <Button
                     text='Update'
-                    action={updateParticipantData}
+                    action={collectParticipantData}
                     dataSet={item._id}
                   />
                 </td>
