@@ -52,6 +52,20 @@ body {
 .class-main-container
   .class-main-container__update-form
   .class-participants-form {
+  position: relative;
   background: #fff;
   height: 375px;
+}
+
+.class-main-container
+  .class-main-container__update-form
+  .class-participants-form
+  .class-participants-form__exit {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  font-weight: 800;
+  color: #170b3b;
 }

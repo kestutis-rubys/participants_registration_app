@@ -4,6 +4,7 @@ import ParticipantsTable from './components/participantsTable/ParticipantsTable'
 import useFetch from './hooks/useFetch';
 
 export const UpdatingData = React.createContext();
+export const ShowUpdatingDataForm = React.createContext();
 
 function App() {
   const [method, setMethod] = useState('');
@@ -33,7 +34,7 @@ function App() {
   const collectParticipantDataForUpdate = (participantId, participantData) => {
     setId(participantId);
     setParticipantData(participantData);
-    setDataUpdating(!dataUpdating);
+    dataUpdating ? setDataUpdating(true) : setDataUpdating(true);
     setShowUpdatingForm(true);
   };
 
@@ -51,44 +52,48 @@ function App() {
   };
   return (
     <UpdatingData.Provider value={{ dataUpdating, setDataUpdating }}>
-      <div className='class-main-container'>
-        <div className='class-main-container__container'>
-          <ParticipantsForm
-            createData={createParticipantData}
-            inputText='Enter'
-          />
-          <ParticipantsTable
-            data={data}
-            loading={loading}
-            error={error}
-            deleteData={deleteParticipantData}
-            collectData={collectParticipantDataForUpdate}
-          />
-        </div>
-        <div className='class-main-container__message'>
-          {showMessage && loading ? (
-            <p className='class-main-container__message-text'>Saving...</p>
-          ) : error ? (
-            <p className='class-main-container__message-text'>{error}</p>
-          ) : (
-            <p className='class-main-container__message-text'> {message} </p>
-          )}
-        </div>
-
-        {showUpdatingForm && (
-          <div className='class-main-container__update-form'>
+      <ShowUpdatingDataForm.Provider
+        value={{ showUpdatingForm, setShowUpdatingForm }}
+      >
+        <div className='class-main-container'>
+          <div className='class-main-container__container'>
             <ParticipantsForm
-              inputText='Update'
-              updatingName={participantData.name}
-              updatingSurname={participantData.surname}
-              updatingEmail={participantData.email}
-              updatingAge={participantData.date - participantData.age}
-              updatingId={id}
-              updateData={updateParticipantData}
+              createData={createParticipantData}
+              inputText='Enter'
+            />
+            <ParticipantsTable
+              data={data}
+              loading={loading}
+              error={error}
+              deleteData={deleteParticipantData}
+              collectData={collectParticipantDataForUpdate}
             />
           </div>
-        )}
-      </div>
+          <div className='class-main-container__message'>
+            {showMessage && loading ? (
+              <p className='class-main-container__message-text'>Saving...</p>
+            ) : error ? (
+              <p className='class-main-container__message-text'>{error}</p>
+            ) : (
+              <p className='class-main-container__message-text'> {message} </p>
+            )}
+          </div>
+
+          {showUpdatingForm && (
+            <div className='class-main-container__update-form'>
+              <ParticipantsForm
+                inputText='Update'
+                updatingName={participantData.name}
+                updatingSurname={participantData.surname}
+                updatingEmail={participantData.email}
+                updatingAge={participantData.date - participantData.age}
+                updatingId={id}
+                updateData={updateParticipantData}
+              />
+            </div>
+          )}
+        </div>
+      </ShowUpdatingDataForm.Provider>
     </UpdatingData.Provider>
   );
 }

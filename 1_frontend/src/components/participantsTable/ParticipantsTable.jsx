@@ -60,7 +60,7 @@ const ParticipantsTable = ({
           <tbody>
             {data.map((item) => (
               <tr key={item._id} id={item._id}>
-                <td>{number++ + '.'}</td>
+                <td>{`${number++}.`}</td>
                 <td>
                   {item.name.charAt(0).toUpperCase() +
                     item.name.slice(1) +

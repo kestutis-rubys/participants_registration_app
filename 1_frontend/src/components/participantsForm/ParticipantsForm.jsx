@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { UpdatingData } from '../../App';
+import { ShowUpdatingDataForm } from '../../App';
 // import css
 import './ParticipantsForm.css';
 
@@ -13,11 +14,15 @@ const ParticipantsForm = ({
   updateData,
   inputText,
 }) => {
-  const [name, setName] = useState(updatingName);
-  const [surname, setSurname] = useState(updatingSurname);
-  const [email, setEmail] = useState(updatingEmail);
-  const [age, setAge] = useState(updatingAge);
+  const [name, setName] = useState(updatingName ? updatingName : '');
+  const [surname, setSurname] = useState(
+    updatingSurname ? updatingSurname : ''
+  );
+  const [email, setEmail] = useState(updatingEmail ? updatingEmail : '');
+  const [age, setAge] = useState(updatingAge ? updatingAge : '');
   const { dataUpdating, setDataUpdating } = useContext(UpdatingData);
+  const { showUpdatingForm, setShowUpdatingForm } =
+    useContext(ShowUpdatingDataForm);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -112,6 +117,14 @@ const ParticipantsForm = ({
             value={inputText}
           />
         </div>
+        {showUpdatingForm && (
+          <span
+            onClick={() => setShowUpdatingForm(false)}
+            className='class-participants-form__exit'
+          >
+            ✖
+          </span>
+        )}
       </form>
     </>
   );

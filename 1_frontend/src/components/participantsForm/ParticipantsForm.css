@@ -69,3 +69,7 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.class-participants-form .class-participants-form__exit {
+  display: none;
+}
