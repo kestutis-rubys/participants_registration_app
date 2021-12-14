@@ -10,6 +10,7 @@ function App() {
   const [participantData, setParticipantData] = useState(null);
   const [id, setId] = useState(null);
   const [showUpdatingForm, setShowUpdatingForm] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
   const [dataUpdating, setDataUpdating] = useState(false);
   const [loading, data, error, message] = useFetch(
     method,
@@ -25,6 +26,7 @@ function App() {
   const createParticipantData = (participantData) => {
     setMethod('POST');
     setParticipantData(participantData);
+    setShowMessage(true);
     setShowUpdatingForm(false);
   };
 
@@ -49,35 +51,42 @@ function App() {
   };
   return (
     <UpdatingData.Provider value={{ dataUpdating, setDataUpdating }}>
-      <ParticipantsForm createData={createParticipantData} inputText='Enter' />
-      <ParticipantsTable
-        data={data}
-        loading={loading}
-        error={error}
-        deleteData={deleteParticipantData}
-        collectData={collectParticipantDataForUpdate}
-      />
-      <div>
-        {loading ? (
-          <p>Saving...</p>
-        ) : error ? (
-          <p>{error}</p>
-        ) : (
-          <p> {message} </p>
-        )}
-      </div>
-      <div>
-        {showUpdatingForm && (
+      <div className='class-main-container'>
+        <div className='class-main-container__container'>
           <ParticipantsForm
-            inputText='Update'
-            updatingName={participantData.name}
-            updatingSurname={participantData.surname}
-            updatingEmail={participantData.email}
-            updatingAge={participantData.date - participantData.age}
-            updatingId={id}
-            updateData={updateParticipantData}
+            createData={createParticipantData}
+            inputText='Enter'
           />
-        )}
+          <ParticipantsTable
+            data={data}
+            loading={loading}
+            error={error}
+            deleteData={deleteParticipantData}
+            collectData={collectParticipantDataForUpdate}
+          />
+        </div>
+        <div className='class-main-container__message'>
+          {showMessage && loading ? (
+            <p className='class-main-container__message-text'>Saving...</p>
+          ) : error ? (
+            <p className='class-main-container__message-text'>{error}</p>
+          ) : (
+            <p className='class-main-container__message-text'> {message} </p>
+          )}
+        </div>
+        <div>
+          {showUpdatingForm && (
+            <ParticipantsForm
+              inputText='Update'
+              updatingName={participantData.name}
+              updatingSurname={participantData.surname}
+              updatingEmail={participantData.email}
+              updatingAge={participantData.date - participantData.age}
+              updatingId={id}
+              updateData={updateParticipantData}
+            />
+          )}
+        </div>
       </div>
     </UpdatingData.Provider>
   );

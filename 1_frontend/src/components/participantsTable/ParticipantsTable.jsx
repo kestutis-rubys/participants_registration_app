@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from '../Button/Button';
+// import css
+import './ParticipantsTable.css';
 
 const ParticipantsTable = ({
   data,
@@ -38,7 +40,7 @@ const ParticipantsTable = ({
   };
 
   return (
-    <div>
+    <div className='class-participants-table'>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (

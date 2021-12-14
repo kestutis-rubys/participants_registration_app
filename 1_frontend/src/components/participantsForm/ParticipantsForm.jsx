@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { UpdatingData } from '../../App';
+// import css
+import './ParticipantsForm.css';
 
-const ParticipantsRegistrationForm = ({
+const ParticipantsForm = ({
   createData,
   updatingName,
   updatingSurname,
@@ -44,53 +46,75 @@ const ParticipantsRegistrationForm = ({
 
   return (
     <>
-      <form onSubmit={submitHandler}>
-        <div>
-          <label htmlFor='name'>Name</label>
-          <br />
+      <form className='class-participants-form' onSubmit={submitHandler}>
+        <div className='class-participants-form__field'>
+          <label
+            className='class-participants-form__field-label'
+            htmlFor='name'
+          >
+            Name
+          </label>
           <input
+            className='class-participants-form__field-input'
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
             required={true}
           />
         </div>
-        <div>
-          <label htmlFor='surname'>Surame</label>
-          <br />
+        <div className='class-participants-form__field'>
+          <label
+            className='class-participants-form__field-label'
+            htmlFor='surname'
+          >
+            Surame
+          </label>
           <input
+            className='class-participants-form__field-input'
             type='text'
             value={surname}
             required={true}
             onChange={(e) => setSurname(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor='email'>Email</label>
-          <br />
+        <div className='class-participants-form__field'>
+          <label
+            className='class-participants-form__field-label'
+            htmlFor='email'
+          >
+            Email
+          </label>
           <input
+            className='class-participants-form__field-input'
             type='email'
             value={email}
             required={true}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div>
-          <label htmlFor='age'>Age</label>
-          <br />
+        <div className='class-participants-form__field'>
+          <label className='class-participants-form__field-label' htmlFor='age'>
+            Age
+          </label>
           <input
+            className='class-participants-form__field-input'
             type='number'
             value={age}
             required={true}
             onChange={(e) => setAge(e.target.value)}
           />
         </div>
-        <div>
-          <input data-set={updatingId} type='submit' value={inputText} />
+        <div className='class-participants-form__field'>
+          <input
+            className='class-participants-form__field-submit'
+            data-set={updatingId}
+            type='submit'
+            value={inputText}
+          />
         </div>
       </form>
     </>
   );
 };
 
-export default ParticipantsRegistrationForm;
+export default ParticipantsForm;
