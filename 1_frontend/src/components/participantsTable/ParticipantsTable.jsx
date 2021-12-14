@@ -40,25 +40,27 @@ const ParticipantsTable = ({
   };
 
   return (
-    <div className='class-participants-table'>
+    <>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <table>
+        <table className='class-participants-table'>
           <thead>
             <tr>
               <th>No.</th>
               <th>Name and surname</th>
               <th>Email address</th>
               <th>Year of birth</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {data.map((item) => (
               <tr key={item._id} id={item._id}>
-                <td>{number++}.</td>
+                <td>{number++ + '.'}</td>
                 <td>
                   {item.name.charAt(0).toUpperCase() +
                     item.name.slice(1) +
@@ -87,7 +89,7 @@ const ParticipantsTable = ({
           </tbody>
         </table>
       )}
-    </div>
+    </>
   );
 };
 

@@ -21,7 +21,6 @@ body {
 
 .class-main-container .class-main-container__container {
   display: flex;
-  justify-content: space-between;
   gap: 25px;
   height: 60vh;
   width: 100%;
@@ -36,5 +35,6 @@ body {
   .class-main-container__message
   .class-main-container__message-text {
   padding: 0 15px;
-  border-left: 2px solid;
+  border-left: 5px solid #b637fa;
+  color: #170b3b;
 }
