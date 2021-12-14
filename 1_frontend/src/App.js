@@ -74,8 +74,9 @@ function App() {
             <p className='class-main-container__message-text'> {message} </p>
           )}
         </div>
-        <div>
-          {showUpdatingForm && (
+
+        {showUpdatingForm && (
+          <div className='class-main-container__update-form'>
             <ParticipantsForm
               inputText='Update'
               updatingName={participantData.name}
@@ -85,8 +86,8 @@ function App() {
               updatingId={id}
               updateData={updateParticipantData}
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </UpdatingData.Provider>
   );
