@@ -21,6 +21,10 @@
   background: #b637fa0f;
 }
 
+.class-participants-table tbody tr:hover {
+  background: #170b3b3d;
+}
+
 .class-participants-table tbody tr td {
   padding: 7px 7px;
   font-size: 14px;
